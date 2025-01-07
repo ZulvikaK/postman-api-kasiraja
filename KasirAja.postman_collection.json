@@ -1,0 +1,1981 @@
+{
+	"info": {
+		"_postman_id": "176dac3d-ecdc-480b-a389-0189733247d9",
+		"name": "KasirAja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22129332"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test status code\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct message\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Toko berhasil didaftarkan\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of name and email in data\r",
+									"pm.test(\"Data contains name and email\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"name\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"email\");\r",
+									"});\r",
+									"\r",
+									"// Test for name and email values\r",
+									"//pm.test(\"Name and email are correct\", function () {\r",
+									"//    pm.expect(jsonData.data.name).to.eql(\"Toko20\");\r",
+									"//    pm.expect(jsonData.data.email).to.eql(\"testerToko20@gmail.com\");\r",
+									"//});\r",
+									"\r",
+									"// Additional validation for email format\r",
+									"pm.test(\"Email is in valid format\", function () {\r",
+									"    pm.expect(jsonData.data.email).to.match(/^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$/);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{nama}}\",\r\n    \"email\": \"{{$timestamp}}_toko20@gmail.com\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/registration",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"TokoZul\",\r\n    \"email\": \"testerZul@gmail.com\",\r\n    \"password\": \"P4ssword123#\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/registration",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"registration"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "origin,User-Agent"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "content-length",
+									"value": "114"
+								},
+								{
+									"key": "date",
+									"value": "Mon, 06 Jan 2025 06:33:25 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "strict-transport-security",
+									"value": "max-age=31536000; includeSubDomains; preload"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Toko berhasil didaftarkan\",\n    \"data\": {\n        \"name\": \"TokoZul\",\n        \"email\": \"testerZul@gmail.com\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct message\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Authentication berhasil ditambahkan\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of accessToken\r",
+									"pm.test(\"Access token is present\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"accessToken\");\r",
+									"    pm.expect(jsonData.data.accessToken).to.be.a(\"string\").and.not.empty;\r",
+									"});\r",
+									"\r",
+									"// Test for presence of refreshToken\r",
+									"pm.test(\"Refresh token is present\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"refreshToken\");\r",
+									"    pm.expect(jsonData.data.refreshToken).to.be.a(\"string\").and.not.empty;\r",
+									"});\r",
+									"\r",
+									"// Test for user object and properties\r",
+									"pm.test(\"User object contains necessary properties\", function () {\r",
+									"    var user = jsonData.data.user;\r",
+									"    pm.expect(user).to.have.property(\"id\");\r",
+									"    pm.expect(user).to.have.property(\"name\");\r",
+									"    pm.expect(user).to.have.property(\"role\");\r",
+									"    pm.expect(user).to.have.property(\"email\");\r",
+									"    pm.expect(user).to.have.property(\"officeid\");\r",
+									"    pm.expect(user).to.have.property(\"companyid\");\r",
+									"    pm.expect(user).to.have.property(\"company_name\");\r",
+									"\r",
+									"    // Additional type checks\r",
+									"    pm.expect(user.name).to.be.a(\"string\");\r",
+									"    pm.expect(user.email).to.include(\"@\");\r",
+									"    pm.expect(user.role).to.be.oneOf([\"admin\", \"user\"]); // Adjust if more roles exist\r",
+									"});\r",
+									"\r",
+									"var respon = pm.response.json();\r",
+									"pm.environment.set(\"accessToken\", respon.data.accessToken);\r",
+									"pm.environment.set(\"refreshToken\", respon.data.refreshToken);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authentications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authentications"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/authentications",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"authentications"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 06 Jan 2025 09:56:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "818"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "access-control-expose-headers",
+									"value": "WWW-Authenticate,Server-Authorization"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "vary",
+									"value": "origin"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=N064CNdf41DwL7Qy3%2BXI0dy2Ebgo%2F98Ogw%2BKmFYm36dg8SL4h7CviqYeAoss4A9L3bOzct7R4VEan%2F%2FGMhWuCmkD2KMDTWeosdEjT4ucK%2B5NXg0l7TEb0tAGjNiXpeFvuVyd0rn5tg%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8fdad6214dad9c3f-SIN"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								},
+								{
+									"key": "server-timing",
+									"value": "cfL4;desc=\"?proto=TCP&rtt=36453&min_rtt=26078&rtt_var=22540&sent=56&recv=57&lost=0&retrans=0&sent_bytes=5303&recv_bytes=1717&delivery_rate=111971&cwnd=253&unsent_bytes=0&cid=e5bd8a302333103c&ts=51732&x=0\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Authentication berhasil ditambahkan\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiYWNjMzZkLTk5MWQtNGNhNC04YWJkLWJlNTBkYjNkZWE3YiIsImNvbXBhbnlJZCI6ImExYjNmNmM3LTc1MmYtNGVlYy04ZGI3LTRlNzM5ZTYzNTNiOSIsImlhdCI6MTczNjE1NzM2OX0.FAnTlbfkke5351Z3ksBM7uu9KjycTzRG3mRA6ulsF0g\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjBiYWNjMzZkLTk5MWQtNGNhNC04YWJkLWJlNTBkYjNkZWE3YiIsImNvbXBhbnlJZCI6ImExYjNmNmM3LTc1MmYtNGVlYy04ZGI3LTRlNzM5ZTYzNTNiOSIsImlhdCI6MTczNjE1NzM2OX0.8lwU_nH9v_6zmCj-8DGziAQMCWyixxE2ALSJPH6qctU\",\n        \"user\": {\n            \"id\": \"0bacc36d-991d-4ca4-8abd-be50db3dea7b\",\n            \"name\": \"Toko66\",\n            \"role\": \"admin\",\n            \"email\": \"testerToko66@gmail.com\",\n            \"officeid\": \"7dee8fe1-d233-4c18-829e-8d0bd9cffcd7\",\n            \"companyid\": \"a1b3f6c7-752f-4eec-8db7-4e739e6353b9\",\n            \"company_name\": \"Toko66\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct message\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Access Token berhasil diperbarui\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of accessToken\r",
+									"pm.test(\"Access token is present\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"accessToken\");\r",
+									"    pm.expect(jsonData.data.accessToken).to.be.a(\"string\").and.not.empty;\r",
+									"});\r",
+									"\r",
+									"// Test for valid token format\r",
+									"pm.test(\"Access token is a valid JWT\", function () {\r",
+									"    var tokenParts = jsonData.data.accessToken.split('.');\r",
+									"    pm.expect(tokenParts.length).to.eql(3);  // JWT should have three parts separated by dots\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"refreshToken\": \"{{refreshToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authentications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authentications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test status code\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct message\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Refresh token berhasil dihapus\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"refreshToken\": \"{{refreshToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/authentications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"authentications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Parse response body\r",
+									"var respon = pm.response.json();\r",
+									"\r",
+									"// Simpan userId ke environment variable\r",
+									"pm.environment.set(\"userId\", respon.data.userId);\r",
+									"// Test status code\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct message\r",
+									"pm.test(\"Message is correct\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"User berhasil ditambahkan\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of userId and name in data\r",
+									"pm.test(\"Data contains userId and name\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"userId\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"name\");\r",
+									"});\r",
+									"\r",
+									"// Test for userId format (UUID)\r",
+									"pm.test(\"userId is in UUID format\", function () {\r",
+									"    pm.expect(jsonData.data.userId).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user-{{$timestamp}}\",\r\n    \"email\": \"{{$timestamp}}_user@gmail.com\",\r\n    \"password\": \"{{$randomPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of user object in data\r",
+									"pm.test(\"Data contains user object\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"user\");\r",
+									"});\r",
+									"\r",
+									"// Test for user properties: id, name, email, and role\r",
+									"pm.test(\"User object contains required fields\", function () {\r",
+									"    pm.expect(jsonData.data.user).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData.data.user).to.have.property(\"name\");\r",
+									"    pm.expect(jsonData.data.user).to.have.property(\"email\");\r",
+									"    pm.expect(jsonData.data.user).to.have.property(\"role\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct data types\r",
+									"pm.test(\"User properties have correct types\", function () {\r",
+									"    pm.expect(jsonData.data.user.id).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.user.name).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.user.email).to.be.a(\"string\");\r",
+									"    pm.expect(jsonData.data.user.role).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"// Test for specific values (adjust if needed)\r",
+									"pm.test(\"Role is kasir\", function () {\r",
+									"    pm.expect(jsonData.data.user.role).to.eql(\"kasir\");\r",
+									"});\r",
+									"\r",
+									"// Validate email format\r",
+									"pm.test(\"Email is in valid format\", function () {\r",
+									"    pm.expect(jsonData.data.user.email).to.match(/^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$/);\r",
+									"});\r",
+									"\r",
+									"// Validate id format (UUID)\r",
+									"pm.test(\"ID is in valid UUID format\", function () {\r",
+									"    pm.expect(jsonData.data.user.id).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of users array\r",
+									"pm.test(\"Data contains users array\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"users\").that.is.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of at least one user\r",
+									"pm.test(\"Users array is not empty\", function () {\r",
+									"    pm.expect(jsonData.data.users.length).to.be.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"// Test each user object has required fields and correct data types\r",
+									"jsonData.data.users.forEach(function (user, index) {\r",
+									"    pm.test(`User object at index ${index} contains required fields`, function () {\r",
+									"        pm.expect(user).to.have.property(\"id\").that.is.a(\"string\");\r",
+									"        pm.expect(user).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"        pm.expect(user).to.have.property(\"email\").that.is.a(\"string\");\r",
+									"        pm.expect(user).to.have.property(\"role\").that.is.a(\"string\").and.oneOf([\"kasir\", \"admin\"]);\r",
+									"    });\r",
+									"\r",
+									"    // Validate user ID format (UUID)\r",
+									"    pm.test(`User ID at index ${index} is in UUID format`, function () {\r",
+									"        pm.expect(user.id).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);\r",
+									"    });\r",
+									"\r",
+									"    // Validate email format\r",
+									"    pm.test(`Email at index ${index} is in valid format`, function () {\r",
+									"        pm.expect(user.email).to.match(/^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$/);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"// Test for meta object with correct properties\r",
+									"pm.test(\"Meta object contains required fields\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"meta\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"totalPages\").that.is.a(\"number\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"total\").that.is.a(\"string\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"page\").that.is.a(\"number\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for success message\r",
+									"pm.test(\"Message is 'User berhasil diupdate'\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"User berhasil diupdate\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of 'name' in data\r",
+									"pm.test(\"Data contains 'name' field\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"update-user\",\r\n    \"email\" : \"{{$timestamp}}update-user@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for success message\r",
+									"pm.test(\"Message is 'User berhasil dihapus'\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"User berhasil dihapus\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Units",
+			"item": [
+				{
+					"name": "Add Unit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for success message\r",
+									"pm.test(\"Message is 'Unit berhasil ditambahkan'\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Unit berhasil ditambahkan\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of 'unitId' in data\r",
+									"pm.test(\"Data contains 'unitId' field\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"unitId\").that.is.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of 'name' in data\r",
+									"pm.test(\"Data contains 'name' field\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"var respon = pm.response.json();\r",
+									"\r",
+									"// Simpan userId ke environment variable\r",
+									"pm.environment.set(\"unitId\", respon.data.unitId);\r",
+									"\r",
+									"// Test for specific unit name\r",
+									"pm.test(\"Unit name is 'gram'\", function () {\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"gram\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"gram\",\r\n    \"description\": \"weight measurement\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/units",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"units"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Unit Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of 'unit' object in data\r",
+									"pm.test(\"Data contains 'unit' object\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"unit\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of 'name' and 'description' in 'unit' object\r",
+									"pm.test(\"Unit contains 'name' and 'description'\", function () {\r",
+									"    pm.expect(jsonData.data.unit).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"    pm.expect(jsonData.data.unit).to.have.property(\"description\").that.is.a(\"string\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/units/{{unitId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"units",
+								"{{unitId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Unit List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of 'units' array in data\r",
+									"pm.test(\"Data contains 'units' array\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"units\").that.is.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"// Test for each unit having 'id', 'name', and 'description'\r",
+									"jsonData.data.units.forEach(function(unit) {\r",
+									"    pm.test(\"Unit has 'id', 'name', and 'description'\", function () {\r",
+									"        pm.expect(unit).to.have.property(\"id\").that.is.a(\"string\");\r",
+									"        pm.expect(unit).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"        pm.expect(unit).to.have.property(\"description\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"// Test for presence of meta object inside data\r",
+									"pm.test(\"Meta object exists inside data\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"meta\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Pagination meta data is correct\", function () {\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"totalPages\").that.is.a(\"number\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"total\").that.is.a(\"string\");\r",
+									"    pm.expect(jsonData.data.meta.page).to.be.a(\"number\");  // Changed to expect a number for 'page'\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/units",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"units"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Unit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"update_meter\",\r\n    \"description\": \"no-meter\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/units/{{unitId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"units",
+								"{{unitId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Unit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for empty 'data' object\r",
+									"pm.test(\"Data object is empty\", function () {\r",
+									"    pm.expect(jsonData.data).to.eql({});\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/units/{{unitId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"units",
+								"{{unitId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Add Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct success message\r",
+									"pm.test(\"Message is 'Category berhasil ditambahkan'\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Category berhasil ditambahkan\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of categoryId and name\r",
+									"pm.test(\"Data contains 'categoryId' and 'name'\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"categoryId\").that.is.a(\"string\");\r",
+									"    pm.expect(jsonData.data).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"var respon = pm.response.json();\r",
+									"\r",
+									"// Simpan userId ke environment variable\r",
+									"pm.environment.set(\"categoryId\", respon.data.categoryId);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"makanan manis\",\r\n    \"description\": \"makanan manis dari Indofood\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of category object\r",
+									"pm.test(\"Category object exists\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"category\");\r",
+									"});\r",
+									"\r",
+									"// Test for specific category name\r",
+									"pm.test(\"Category name is 'makanan manis'\", function () {\r",
+									"    pm.expect(jsonData.data.category.name).to.eql(\"makanan manis\");\r",
+									"});\r",
+									"\r",
+									"// Test for specific category description\r",
+									"pm.test(\"Category description is 'makanan ringan dari Indofood'\", function () {\r",
+									"    pm.expect(jsonData.data.category.description).to.eql(\"makanan manis dari Indofood\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/{{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of categories array\r",
+									"pm.test(\"Categories array exists\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"categories\").that.is.an(\"array\");\r",
+									"});\r",
+									"\r",
+									"// Test for the first category object structure\r",
+									"pm.test(\"First category contains 'id', 'name', and 'description'\", function () {\r",
+									"    var category = jsonData.data.categories[0];\r",
+									"    pm.expect(category).to.have.property(\"id\").that.is.a(\"string\");\r",
+									"    pm.expect(category).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"    pm.expect(category).to.have.property(\"description\").that.is.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"// Test for meta object presence\r",
+									"pm.test(\"Meta object exists\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"meta\");\r",
+									"});\r",
+									"\r",
+									"// Test for pagination meta values\r",
+									"pm.test(\"Meta values are correct\", function () {\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"totalPages\").that.is.a(\"number\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"total\").that.is.a(\"string\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"page\").that.is.a(\"number\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct name in data\r",
+									"pm.test(\"Name is 'update-minuman'\", function () {\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"update-minuman\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"update-minuman\",\r\n    \"description\": \"no-minuman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories/{{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object is empty\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\").that.is.an(\"object\").and.to.be.empty;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/{{categoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"{{categoryId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Add Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for success message\r",
+									"pm.test(\"Message is 'Customer berhasil ditambahkan'\", function () {\r",
+									"    pm.expect(jsonData.message).to.eql(\"Customer berhasil ditambahkan\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct customerId\r",
+									"pm.test(\"customerId is valid UUID\", function () {\r",
+									"    pm.expect(jsonData.data.customerId).to.match(/^[0-9a-fA-F-]{36}$/);\r",
+									"});\r",
+									"\r",
+									"// Test for correct name\r",
+									"//pm.test(\"Name is 'Budi'\", function () {\r",
+									"    //pm.expect(jsonData.data.name).to.eql(\"Budi\");\r",
+									"//});\r",
+									"\r",
+									"var respon = pm.response.json();\r",
+									"// Simpan userId ke environment variable\r",
+									"pm.environment.set(\"customerId\", respon.data.customerId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"08123456789\",\r\n    \"address\": \"{{$randomStreetAddress}}\",\r\n    \"description\": \"-\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test for success status\r",
+									"pm.test(\"Status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of data object\r",
+									"pm.test(\"Data object exists\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"// Test for presence of customer object\r",
+									"pm.test(\"Customer object exists\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"customer\");\r",
+									"});\r",
+									"\r",
+									"// Test for correct customer name\r",
+									"//pm.test(\"Customer name is 'Budi'\", function () {\r",
+									"//   pm.expect(jsonData.data.customer.name).to.eql(\"Budi\");\r",
+									"//});\r",
+									"\r",
+									"// Test for correct phone number\r",
+									"//pm.test(\"Phone number is '081234567890'\", function () {\r",
+									"//   pm.expect(jsonData.data.customer.phone).to.eql(\"081234567890\");\r",
+									"//});\r",
+									"\r",
+									"// Test for correct address\r",
+									"//pm.test(\"Address is 'Bandoeng'\", function () {\r",
+									"//    pm.expect(jsonData.data.customer.address).to.eql(\"Bandoeng\");\r",
+									"//});\r",
+									"\r",
+									"// Test for correct description\r",
+									"//pm.test(\"Description is 'Budi anak Pak Edi'\", function () {\r",
+									"//   pm.expect(jsonData.data.customer.description).to.eql(\"Budi anak Pak Edi\");\r",
+									"//});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers/{{customerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test if the response status is \"success\"\r",
+									"pm.test(\"Response status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test if there are customers in the response\r",
+									"pm.test(\"Customers data is available\", function () {\r",
+									"    pm.expect(jsonData.data.customers).to.be.an('array').that.is.not.empty;\r",
+									"});\r",
+									"\r",
+									"// Test for the first customer data structure\r",
+									"pm.test(\"First customer contains 'id', 'name', 'phone', and 'description'\", function () {\r",
+									"    var customer = jsonData.data.customers[0];\r",
+									"    pm.expect(customer).to.have.property(\"id\").that.is.a(\"string\");\r",
+									"    pm.expect(customer).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"    pm.expect(customer).to.have.property(\"phone\").that.is.a(\"string\");\r",
+									"    pm.expect(customer).to.have.property(\"description\").that.is.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Test for the total number of customers in the response\r",
+									"pm.test(\"Total customers count is correct\", function () {\r",
+									"    pm.expect(jsonData.data.customers.length).to.eql(2);\r",
+									"});\r",
+									"\r",
+									"// Test for pagination meta data (totalPages, total, page)\r",
+									"pm.test(\"Pagination meta data is correct\", function () {\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"totalPages\").that.is.a(\"number\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"total\").that.is.a(\"string\");\r",
+									"    pm.expect(jsonData.data.meta).to.have.property(\"page\").that.is.a(\"number\");\r",
+									"});\r",
+									"\r",
+									"// Test for the meta object presence\r",
+									"pm.test(\"Meta object exists\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"meta\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test if the response status is \"success\"\r",
+									"pm.test(\"Response status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test if the 'data' object exists and contains 'name'\r",
+									"pm.test(\"Data object contains 'name'\", function () {\r",
+									"    pm.expect(jsonData.data).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"// Test if 'name' value is \"Edward Oberbrunner II_update\"\r",
+									"//pm.test(\"Name value is correct\", function () {\r",
+									"//  pm.expect(jsonData.data.name).to.eql(\"Edward Oberbrunner II_update\");\r",
+									"//});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{$randomFullName}}_update\",\r\n    \"phone\": \"08123456789\",\r\n    \"address\": \"{{$randomStreetAddress}}_update\",\r\n    \"description\": \"-\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customers/{{customerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse response body\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test for status code 200 (Successful deletion)\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test if the response status is \"success\"\r",
+									"pm.test(\"Response status is success\", function () {\r",
+									"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+									"});\r",
+									"\r",
+									"// Test if the data object is empty\r",
+									"pm.test(\"Data object is empty\", function () {\r",
+									"    pm.expect(jsonData.data).to.eql({});\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customers/{{customerId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customers",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "refreshToken",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}
