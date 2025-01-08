@@ -46,3 +46,5 @@ Generate an HTML report after running the tests:
 
     newman run KasirAja.postman_collection.json -e KasirAjaMySkill.postman_environment.json -r html --reporter-html-export newman-report.html
 
+## Result of Automation Testing for KasirAjaApi using Newman
+[ResultNewman](https://www.notion.so/Result-of-Automation-Testing-for-KasirAjaApi-using-Newman-175c4a53b333809295d0d558b4da8f12?pvs=4)
